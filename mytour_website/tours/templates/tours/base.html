@@ -18,8 +18,34 @@
 
 <body id="bg" style="background-color: rgb(48, 166, 245);">
 
-    {% include 'events/navbar.html' %}
-    {% block content %}{% endblock %}
+    {% include 'tours/navbar.html' %}
+    <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    Overview
+                </li>
+            </ol>
+        </nav>
+        {% block content %}{% endblock %}
+        <footer class="pt-5 d-flex justify-content-between text-light">
+            <span>Copyright © 2023-2024
+                <a href="https://themesberg.com">Zelasko SA</a></span>
+            <ul class="nav m-0">
+                <li class="nav-item">
+                    <a class="nav-link text-light" aria-current="page" href="#">Privacy Policy</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Terms and conditions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-light" href="#">Contact</a>
+                </li>
+            </ul>
+        </footer>
+    </main>
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
         integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
         crossorigin="anonymous"></script>

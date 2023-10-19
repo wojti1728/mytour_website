@@ -9,4 +9,5 @@ urlpatterns = [
     # path: whole urls
     path('', views.home, name="home"),
     path('<int:year>/<str:month>/', views.home, name="home"),
+    path('tours', views.all_tours, name="list-tours"),
 ]
