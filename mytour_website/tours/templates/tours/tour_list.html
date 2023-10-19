@@ -5,7 +5,74 @@
 
 <div class="container">
     <h1>Tours</h1>
-    {{ tour_list }}
+    <br>
+
+    {% for tour in tour_list%}
+
+    <div class="card">
+        <div class="card-header">
+            {{ tour.title }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Start Date: {{ tour.start_date }}</h5>
+            <p class="card-text">
+
+            <ul>
+                <b>Description:</b> {{ tour.description }}<br>
+                <b>Start Date:</b> {{ tour.start_date }}<br>
+                <b>End Date:</b> {{ tour.end_date }}<br>
+                <b>Price:</b> {{ tour.price }}<br>
+                <br>
+                <b>Things List:</b>
+                <ul>
+                    {% for item in tour.things_list.all %}
+                    <li>{{ item.title }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <b>Attendess:</b>
+                <ul>
+                    {% for user in tour.attendees.all %}
+                    <li>{{ user.user_name }}</li>
+                    {% endfor %}
+                </ul>
+                <br>
+                <b>Plan:</b>
+                <ul>
+                    {% for day in tour.day.all %}
+                    <b>Date:</b> {{ day.date }}<br>
+                    <b>Places:</b>
+                    <ul>
+                        {% for place in day.places.all %}
+                        <b>Name: </b> {{ place.name }}<br>
+                        <b>Address: </b> {{ place.address }}<br>
+                        {% endfor %}
+                    </ul>
+                    <b>Accommodation:</b>
+                    <ul>
+                        <b>Name: </b>{{ day.accomadation.name }}<br>
+                        <b>Address: </b>{{ day.accomadation.address }}<br>
+                    </ul>
+                    <b>Sightseeing:</b>
+                    <ul>
+                        {% for idea in day.sightseeing.all %}
+                        <b>Idea:</b> {{ idea.name }}<br>
+                        <b>Price:</b> {{ idea.price }}<br>
+                        {% endfor %}
+                    </ul>
+                    {% endfor %}
+                </ul>
+
+            </ul>
+            </p>
+        </div>
+    </div>
+    <br>
+
+
+    {% endfor %}
+
+
 </div>
 
 
