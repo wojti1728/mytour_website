@@ -15,4 +15,7 @@ urlpatterns = [
     path('list_places/', views.list_places, name='list-places'),
     path('show_place/<id>', views.show_place, name='show-place'),
     path('search_places/', views.search_places, name="search-places"),
+    path('update_place/<id>', views.update_place, name='update-place'),
+    path('update_tour/<id>', views.update_tour, name='update-tour'),
+    path('list_tours/', views.list_tours, name="list-tours2"),
 ]

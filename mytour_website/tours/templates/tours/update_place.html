@@ -1,0 +1,18 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<center>
+    <h1>Update Place</h1>
+
+    <br />
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <br>
+        <input type="submit" value="Update" class="btn btn-primary">
+    </form>
+
+
+</center>
+
+{% endblock %}

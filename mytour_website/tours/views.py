@@ -10,6 +10,29 @@ from django.forms import modelformset_factory, inlineformset_factory
 from .forms import TourForm
 
 
+def update_tour(request, id):
+    tour = Tour.objects.get(pk=id)
+    form = TourForm(request.POST or None, instance=tour)
+    if form.is_valid():
+        form.save()
+        return redirect('list-tours2')
+    return render(request, 'tours/update_tour.html', {'tour': tour, 'form': form})
+
+
+def list_tours(request):
+    tour_list = Tour.objects.all()
+    return render(request, 'tours/tour.html', {'tour_list': tour_list})
+
+
+def update_place(request, id):
+    place = Place.objects.get(pk=id)
+    form = PlaceForm(request.POST or None, instance=place)
+    if form.is_valid():
+        form.save()
+        return redirect('list-places')
+    return render(request, 'tours/update_place.html', {'place': place, 'form': form})
+
+
 def search_places(request):
     if request.method == 'POST':
         searched = request.POST.get('searched', False)

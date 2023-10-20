@@ -2,16 +2,16 @@
 
 {% block content %}
 <center>
-    <h1>Places...</h1>
+    <h1>Tours:</h1>
     <br />
     <table class="table table-primary table-hover table-striped table-bordered w-75">
-        {% for place in place_list %}
+        {% for tour in tour_list %}
         <tr class="table-secondary">
             <td>
-                <a href="{% url 'show-place' place.id %}"> {{ place }}</a><br>
+                <a href=""> {{ tour }}</a><br>
             </td>
             <td align="right">
-                <a href="{% url 'update-place' place.id %}" class="btn btn-primary btn-sm">Update</a>
+                <a href="{% url 'update-tour' tour.id %}" class="btn btn-primary btn-sm">Update</a>
             </td>
         </tr>
         {% endfor %}
