@@ -5,8 +5,6 @@ from .models import Tour, Place, Accommodation, ThingsList, Transport, MyTourUse
 
 class TourForm(forms.ModelForm):
     # Custom form fields for related models
-    places = forms.ModelChoiceField(
-        queryset=Place.objects.all(), required=False)
     accommodation = forms.ModelChoiceField(
         queryset=Accommodation.objects.all(), required=False)
     transports = forms.ModelMultipleChoiceField(widget=forms.CheckboxSelectMultiple(attrs={'class': '', 'type': 'checkbox'}),
@@ -23,16 +21,28 @@ class TourForm(forms.ModelForm):
                   'end_date', 'transports', 'price', 'administrator',
                   'attendees', 'tour_plan', 'places', 'accommodation', 'things_list',)
 
-        # labels = {
-        # }
+        labels = {
+            'title': 'Tour Name',
+            'description': '',
+            'start_date': 'Start Tour Date',
+            'end_date': 'End Tour Date',
+            'transports': 'Main Transports',
+            'price': 'Summary Price',
+            'administrator': 'Tour Menager',
+            'attendees': '',
+            'tour_plan': 'Main Plan of The Tour',
+            'places': 'Main Places',
+            'accommodation': 'Place of Accommodation',
+            'things_list': ''
+        }
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control w-50', 'placeholder': 'Tour Name'}),
-            'description': forms.Textarea(attrs={'class': 'form-control w-50', 'placeholder': 'Description'}),
-            'start_date': forms.DateInput(),
-            'end_date': forms.DateInput(),
+            'description': forms.TextInput(attrs={'class': 'form-control w-50', 'placeholder': 'Description'}),
+            'start_date': forms.DateInput(attrs={'type': 'date'}),
+            'end_date': forms.DateInput(attrs={'type': 'date'}),
             'price': forms.NumberInput(attrs={'class': 'form-control w-25', 'placeholder': 'Tour Price'}),
-            'tour_plan': forms.Textarea(attrs={'class': 'form-control w-75', 'placeholder': 'TOur Plan With Details'}),
+            'tour_plan': forms.Textarea(attrs={'class': 'form-control w-75', 'placeholder': 'Tour Plan With Details'}),
         }
 
 # create a tour form

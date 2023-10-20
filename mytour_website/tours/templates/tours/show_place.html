@@ -1,0 +1,23 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<center>
+    <br />
+    <div class="card w-50">
+        <div class=" card-header">
+            <b>{{ place }}</b>
+        </div>
+        <div class="card-body">
+            <p class="card-text">
+                <b>Description:</b><br>
+                {{ place.description }}<br><br>
+                <b>Main Address:</b><br>
+                {{ place.address }}<br><br>
+                <b>Web Page Address:</b><br>
+                <a href="{{ place.web }}"> {{ place.web }}</a> <br>
+            </p>
+        </div>
+    </div>
+</center>
+
+{% endblock %}

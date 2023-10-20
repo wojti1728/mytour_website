@@ -12,4 +12,7 @@ urlpatterns = [
     path('tours', views.all_tours, name="list-tours"),
     path('add_place', views.add_place, name='add-place'),
     path('create_tour/', views.create_tour, name='create-tour'),
+    path('list_places/', views.list_places, name='list-places'),
+    path('show_place/<id>', views.show_place, name='show-place'),
+    path('search_places/', views.search_places, name="search-places"),
 ]

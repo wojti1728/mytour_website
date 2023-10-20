@@ -1,0 +1,25 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<center>
+
+    {% if searched %}
+    <h1>Searched Results For "{{ searched }}"</h1>
+    <br>
+    <table class="table table-primary table-hover table-striped table-bordered w-50">
+        {% for place in places %}
+        <tr class="table-secondary">
+            <td class="text-center">
+                <a href="{% url 'show-place' place.id %}"> {{ place }}</a><br>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+    <h1>Error! You forgot to search a Place{{ searched }}</h1>
+    {% endif %}
+    <br />
+
+</center>
+
+{% endblock %}

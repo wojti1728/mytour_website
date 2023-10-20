@@ -1,5 +1,5 @@
 {% load static %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/main2.css' %}" />
+<link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}" />
 <nav class="navbar navbar-light bg-primary bg-gradient p-3">
     <div class="d-flex col-12 col-md-3 col-lg-2 mb-2 mb-lg-0 flex-wrap flex-md-nowrap justify-content-between">
         <a class="navbar-brand font-md" href="{% url 'home' %}">
@@ -12,9 +12,12 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
-    <div class="col-12 col-md-4 col-lg-2">
-        <input class="form-control form-control-dark" type="text" placeholder="Search key words" aria-label="Search" />
-    </div>
+    <form class="d-flex" method=POST action="{% url 'search-places' %}">
+        {% csrf_token %}
+        <input name="searched" class="form-control form-control-dark me-2" type="search" placeholder="Search key words"
+            aria-label="Search" />
+        <button class=" btn btn-dark ml-3" type="submit">Search</button>
+    </form>
 </nav>
 <div class="container-fluid">
     <div class="row">
@@ -54,7 +57,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
+                        <a class="nav-link" href="{% url 'list-places' %}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                 stroke-linejoin="round" class="feather feather-image">
@@ -62,7 +65,7 @@
                                 <line x1="12" y1="20" x2="12" y2="4"></line>
                                 <line x1="6" y1="20" x2="6" y2="14"></line>
                             </svg>
-                            <span class="ml-3">Expenses</span>
+                            <span class="ml-3">Places</span>
                         </a>
                     </li>
                     <li class="nav-item">

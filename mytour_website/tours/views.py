@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from .models import Tour
+from .models import Tour, Place
 from .forms import PlaceForm
 from django.http import HttpResponseRedirect
 from django.forms import modelformset_factory, inlineformset_factory
@@ -10,28 +10,36 @@ from django.forms import modelformset_factory, inlineformset_factory
 from .forms import TourForm
 
 
-# def create_tour(request):
-#     if request.method == 'POST':
-#         tour_form = TourForm(request.POST)
+def search_places(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched', False)
+        places = Place.objects.filter(name__icontains=searched)
 
-#         if tour_form.is_valid():
-#             tour = tour_form.save()
-#             return redirect('success-url')  # Redirect to a success page
-#     else:
-#         tour_form = TourForm()
+        return render(request, 'tours/search_places.html', {'searched': searched, 'places': places})
+    else:
+        return render(request, 'tours/search_places.html', {})
 
-#     return render(request, 'tours/create_tour.html', {'tour_form': tour_form})
+
+def show_place(request, id):
+    place = Place.objects.get(pk=id)
+    return render(request, 'tours/show_place.html', {'place': place})
+
+
+def list_places(request):
+    place_list = Place.objects.all()
+    return render(request, 'tours/place.html', {'place_list': place_list})
+
 
 def create_tour(request):
     submitted = False
     if request.method == 'POST':
-        tour_form = TourForm(request.POST, prefix='tour')
+        tour_form = TourForm(request.POST)
 
         if tour_form.is_valid():
             tour_form.save()
             return HttpResponseRedirect('/create_tour?submitted=True')
     else:
-        tour_form = TourForm(prefix='tour')
+        tour_form = TourForm()
         if 'submitted' in request.GET:
             submitted = True
 
