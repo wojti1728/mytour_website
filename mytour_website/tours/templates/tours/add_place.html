@@ -1,0 +1,22 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<center>
+    <br /><br />
+    <h1>Add Place To Database</h1>
+    <br /><br />
+    {% if request.GET.submitted %}
+    Your Place Was Submitted Succefully!!
+    {% else %}
+    <form action="" method=POST>
+        {% csrf_token %}
+
+        {{ form.as_p }}
+
+        <input type="submit" value="Submit" class="btn btn-primary">
+
+    </form>
+    {% endif %}
+</center>
+
+{% endblock %}

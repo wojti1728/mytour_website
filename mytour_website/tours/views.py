@@ -1,8 +1,55 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Tour
+from .forms import PlaceForm
+from django.http import HttpResponseRedirect
+from .models import Tour, Day
+from .forms import TourForm, DayForm
+from django.forms import modelformset_factory, inlineformset_factory
+
+
+def create_tour(request):
+    TourDayFormSet = modelformset_factory(
+        Day, form=DayForm, extra=1, can_delete=True)
+
+    if request.method == 'POST':
+        tour_form = TourForm(request.POST, prefix='tour')
+        day_formset = TourDayFormSet(request.POST, prefix='day')
+
+        if tour_form.is_valid() and day_formset.is_valid():
+            tour = tour_form.save()
+            days = day_formset.save(commit=False)
+            for day in days:
+                day.tour = tour
+                day.save()
+
+            return redirect('success-url')  # Redirect to a success page
+    else:
+        tour_form = TourForm(prefix='tour')
+        day_formset = TourDayFormSet(prefix='day')
+
+    return render(request, 'tours/create_tour.html', {
+        'tour_form': tour_form,
+        'day_formset': day_formset,
+    })
+
+
+def add_place(request):
+    submitted = False
+    form = PlaceForm
+    if request.method == 'POST':
+        form = PlaceForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_place?submitted=True')
+        else:
+            form = PlaceForm
+            if 'submitted' in request.GET:
+                submitted = True
+
+    return render(request, 'tours/add_place.html', {'form': form, 'submitted': submitted})
 
 
 def all_tours(request):

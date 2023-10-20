@@ -1,0 +1,26 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<center>
+    <br /><br />
+    <h1>Add Place To Database</h1>
+    <br /><br />
+    {% if request.GET.submitted %}
+    Your Tour Was Submitted Succefully!!
+    {% else %}
+    <form method="post">
+        {% csrf_token %}
+        {{ tour_form.as_p }}
+        <fieldset>
+            <legend>Days</legend>
+            {{ day_formset.management_form }}
+            {% for form in day_formset %}
+            {{ form.as_table }}
+            {% endfor %}
+        </fieldset>
+        <input type="submit" value="Create Tour">
+    </form>
+    {% endif %}
+</center>
+
+{% endblock %}
