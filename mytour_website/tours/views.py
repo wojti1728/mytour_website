@@ -5,34 +5,38 @@ from datetime import datetime
 from .models import Tour
 from .forms import PlaceForm
 from django.http import HttpResponseRedirect
-from .models import Tour, Day
-from .forms import TourForm, DayForm
 from django.forms import modelformset_factory, inlineformset_factory
 
+from .forms import TourForm
+
+
+# def create_tour(request):
+#     if request.method == 'POST':
+#         tour_form = TourForm(request.POST)
+
+#         if tour_form.is_valid():
+#             tour = tour_form.save()
+#             return redirect('success-url')  # Redirect to a success page
+#     else:
+#         tour_form = TourForm()
+
+#     return render(request, 'tours/create_tour.html', {'tour_form': tour_form})
 
 def create_tour(request):
-    TourDayFormSet = modelformset_factory(
-        Day, form=DayForm, extra=1, can_delete=True)
-
+    submitted = False
     if request.method == 'POST':
         tour_form = TourForm(request.POST, prefix='tour')
-        day_formset = TourDayFormSet(request.POST, prefix='day')
 
-        if tour_form.is_valid() and day_formset.is_valid():
-            tour = tour_form.save()
-            days = day_formset.save(commit=False)
-            for day in days:
-                day.tour = tour
-                day.save()
-
-            return redirect('success-url')  # Redirect to a success page
+        if tour_form.is_valid():
+            tour_form.save()
+            return HttpResponseRedirect('/create_tour?submitted=True')
     else:
         tour_form = TourForm(prefix='tour')
-        day_formset = TourDayFormSet(prefix='day')
+        if 'submitted' in request.GET:
+            submitted = True
 
     return render(request, 'tours/create_tour.html', {
-        'tour_form': tour_form,
-        'day_formset': day_formset,
+        'tour_form': tour_form
     })
 
 

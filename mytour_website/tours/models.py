@@ -1,7 +1,9 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 
 class Place(models.Model):
+    id = models.BigAutoField(primary_key=True)
     name = models.CharField('PLace Name', max_length=100)
     description = models.TextField(max_length=300)
     address = models.CharField(max_length=200)
@@ -12,47 +14,47 @@ class Place(models.Model):
 
 
 class Transport(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(max_length=300)
+    id = models.BigAutoField(primary_key=True)
     type = models.CharField(max_length=100)
-    price = models.IntegerField()
+    description = models.TextField(max_length=300)
 
     def __str__(self):
-        return f"Transport: {self.name}"
+        return f"Transport: {self.type}"
 
 
 class Accommodation(models.Model):
-    name = models.CharField('Accomadation Name', max_length=100)
-    description = models.TextField(max_length=300)
-    address = models.CharField(max_length=200)
+    id = models.BigAutoField(primary_key=True)
+    name = models.CharField('Accomadation Names', max_length=100)
+    description = models.TextField(max_length=500)
     price = models.IntegerField()
 
     def __str__(self):
         return f"Accommodation: {self.name}"
 
 
-class Sightseeing(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(max_length=300)
-    address = models.ForeignKey(Place, on_delete=models.CASCADE)
-    price = models.IntegerField()
+# class Sightseeing(models.Model):
+#     name = models.CharField(max_length=100)
+#     description = models.TextField(max_length=300)
+#     address = models.ForeignKey(Place, on_delete=models.CASCADE)
+#     price = models.IntegerField()
 
-    def __str__(self):
-        return f"Sightseeing: {self.name}"
+#     def __str__(self):
+#         return f"Sightseeing: {self.name}"
 
 
-class Day(models.Model):
-    date = models.DateField()
-    places = models.ManyToManyField(Place, related_name='days')
-    accomadation = models.ForeignKey(
-        Accommodation, on_delete=models.CASCADE, related_name='days', blank=True)
-    sightseeing = models.ManyToManyField(Sightseeing, related_name='days')
+# class Day(models.Model):
+#     date = models.DateField()
+#     places = models.ManyToManyField(Place, related_name='days')
+#     accomadation = models.ForeignKey(
+#         Accommodation, on_delete=models.CASCADE, related_name='days', blank=True)
+#     sightseeing = models.ManyToManyField(Sightseeing, related_name='days')
 
-    def __str__(self):
-        return f"Day: {self.date}"
+#     def __str__(self):
+#         return f"Day: {self.date}"
 
 
 class ThingsList(models.Model):
+    id = models.BigAutoField(primary_key=True)
     title = models.CharField('Title', max_length=100)
     description = models.TextField(max_length=300)
 
@@ -61,6 +63,7 @@ class ThingsList(models.Model):
 
 
 class MyTourUser(models.Model):
+    id = models.BigAutoField(primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     user_name = models.CharField(max_length=30)
@@ -71,18 +74,25 @@ class MyTourUser(models.Model):
 
 
 class Tour(models.Model):
+    id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=200)
-    description = models.TextField(max_length=300)
+    description = models.CharField(max_length=300)
     start_date = models.DateField()
     end_date = models.DateField()
+    transports = models.ManyToManyField(
+        Transport, blank=True, default=None)
     price = models.IntegerField()
-    manager = models.CharField('Manager', max_length=50, blank=True)
+    administrator = models.ForeignKey(
+        User, blank=True, null=True, on_delete=models.SET_NULL)
     attendees = models.ManyToManyField(
         MyTourUser, blank=True)
-    day = models.ManyToManyField(
-        Day, related_name='tours', blank=True)
+    tour_plan = models.TextField(max_length=1000, default=None)
+    accommodation = models.ForeignKey(
+        Accommodation, blank=True, null=True, on_delete=models.CASCADE)
+    places = models.ManyToManyField(
+        Place, blank=True, default=None)
     things_list = models.ManyToManyField(
-        ThingsList, related_name='tours', blank=True, default=None)
+        ThingsList, blank=True, default=None)
 
     def __str__(self):
         return f"Tour: {self.title}"

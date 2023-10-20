@@ -6,19 +6,12 @@
     <h1>Add Place To Database</h1>
     <br /><br />
     {% if request.GET.submitted %}
-    Your Tour Was Submitted Succefully!!
+    Your Tour Was Created Succefully!!
     {% else %}
-    <form method="post">
+    <form form action="" method=POST>
         {% csrf_token %}
         {{ tour_form.as_p }}
-        <fieldset>
-            <legend>Days</legend>
-            {{ day_formset.management_form }}
-            {% for form in day_formset %}
-            {{ form.as_table }}
-            {% endfor %}
-        </fieldset>
-        <input type="submit" value="Create Tour">
+        <input type="submit" value="Create Tour" class="btn btn-primary">
     </form>
     {% endif %}
 </center>

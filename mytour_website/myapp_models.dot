@@ -1,6 +1,6 @@
 digraph model_graph {
   // Dotfile by Django-Extensions graph_models
-  // Created: 2023-10-20 10:19
+  // Created: 2023-10-20 11:52
   // Cli Options: -a --dot -o myapp_models.dot
 
   fontname = "Roboto"
@@ -469,7 +469,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
     </TD></TR>
   
   
@@ -519,7 +519,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
     </TD></TR>
   
   
@@ -528,22 +528,6 @@ digraph model_graph {
     <FONT FACE="Roboto">description</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">TextField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">price</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">IntegerField</FONT>
     </TD></TR>
   
   
@@ -569,15 +553,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">address</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
     </TD></TR>
   
   
@@ -602,90 +578,6 @@ digraph model_graph {
     <FONT FACE="Roboto">price</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">IntegerField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  tours_models_Sightseeing [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Sightseeing
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>address</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">description</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">TextField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">name</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">CharField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">price</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">IntegerField</FONT>
-    </TD></TR>
-  
-  
-    </TABLE>
-    >]
-
-  tours_models_Day [label=<
-    <TABLE BGCOLOR="white" BORDER="1" CELLBORDER="0" CELLSPACING="0">
-    <TR><TD COLSPAN="2" CELLPADDING="5" ALIGN="CENTER" BGCOLOR="#1b563f">
-    <FONT FACE="Roboto" COLOR="white" POINT-SIZE="10"><B>
-    Day
-    </B></FONT></TD></TR>
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto"><B>id</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>accomadation</B></FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT FACE="Roboto">date</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">DateField</FONT>
     </TD></TR>
   
   
@@ -703,7 +595,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
     </TD></TR>
   
   
@@ -737,7 +629,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
     </TD></TR>
   
   
@@ -787,7 +679,23 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto"><B>id</B></FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto"><B>AutoField</B></FONT>
+    <FONT FACE="Roboto"><B>BigAutoField</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>accommodation</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>administrator</B></FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT COLOR="#7B7B7B" FACE="Roboto"><B>ForeignKey (id)</B></FONT>
     </TD></TR>
   
   
@@ -795,7 +703,7 @@ digraph model_graph {
     <TR><TD ALIGN="LEFT" BORDER="0">
     <FONT FACE="Roboto">description</FONT>
     </TD><TD ALIGN="LEFT">
-    <FONT FACE="Roboto">TextField</FONT>
+    <FONT FACE="Roboto">CharField</FONT>
     </TD></TR>
   
   
@@ -804,14 +712,6 @@ digraph model_graph {
     <FONT FACE="Roboto">end_date</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">DateField</FONT>
-    </TD></TR>
-  
-  
-  
-    <TR><TD ALIGN="LEFT" BORDER="0">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">manager</FONT>
-    </TD><TD ALIGN="LEFT">
-    <FONT COLOR="#7B7B7B" FACE="Roboto">CharField</FONT>
     </TD></TR>
   
   
@@ -836,6 +736,14 @@ digraph model_graph {
     <FONT FACE="Roboto">title</FONT>
     </TD><TD ALIGN="LEFT">
     <FONT FACE="Roboto">CharField</FONT>
+    </TD></TR>
+  
+  
+  
+    <TR><TD ALIGN="LEFT" BORDER="0">
+    <FONT FACE="Roboto">tour_plan</FONT>
+    </TD><TD ALIGN="LEFT">
+    <FONT FACE="Roboto">TextField</FONT>
     </TD></TR>
   
   
@@ -893,26 +801,23 @@ digraph model_graph {
   [label=" abstract\ninheritance"] [arrowhead=empty, arrowtail=none, dir=both];
 
 
-  tours_models_Sightseeing -> tours_models_Place
-  [label=" address (sightseeing)"] [arrowhead=none, arrowtail=dot, dir=both];
+  tours_models_Tour -> django_contrib_auth_models_User
+  [label=" administrator (tour)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  tours_models_Day -> tours_models_Accommodation
-  [label=" accomadation (days)"] [arrowhead=none, arrowtail=dot, dir=both];
+  tours_models_Tour -> tours_models_Accommodation
+  [label=" accommodation (tour)"] [arrowhead=none, arrowtail=dot, dir=both];
 
-  tours_models_Day -> tours_models_Place
-  [label=" places (days)"] [arrowhead=dot arrowtail=dot, dir=both];
-
-  tours_models_Day -> tours_models_Sightseeing
-  [label=" sightseeing (days)"] [arrowhead=dot arrowtail=dot, dir=both];
+  tours_models_Tour -> tours_models_Transport
+  [label=" transports (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   tours_models_Tour -> tours_models_MyTourUser
   [label=" attendees (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
 
-  tours_models_Tour -> tours_models_Day
-  [label=" day (tours)"] [arrowhead=dot arrowtail=dot, dir=both];
+  tours_models_Tour -> tours_models_Place
+  [label=" places (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
 
   tours_models_Tour -> tours_models_ThingsList
-  [label=" things_list (tours)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" things_list (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
 
 
 }
