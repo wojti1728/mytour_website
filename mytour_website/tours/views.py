@@ -4,10 +4,92 @@ from calendar import HTMLCalendar
 from datetime import datetime
 from .models import Tour, Place
 from .forms import PlaceForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
 from django.forms import modelformset_factory, inlineformset_factory
-
 from .forms import TourForm
+
+from django.http import FileResponse
+import io
+from reportlab.pdfgen import canvas
+from reportlab.lib.units import inch
+from reportlab.lib.pagesizes import letter
+
+
+def tour_pdf(request):
+    buf = io.BytesIO()
+
+    # create canvas
+    c = canvas.Canvas(buf, pagesize=letter, bottomup=0)
+
+    # create a text obj
+    textobj = c.beginText()
+    textobj.setTextOrigin(inch, inch)
+    textobj.setFont('Helvetica', 14)
+
+    tours = Tour.objects.all()
+    lines = []
+
+    for tour in tours:
+        lines.append(
+            f'Tour Name: {tour.title}{tour.description}{tour.start_date}{tour.end_date}{tour.price}Transport:')
+        for transport in tour.transports.all():
+            lines.append(f'{transport.type} - {transport.description}')
+        lines.append(f'Manager: {tour.administrator}')
+        for attendee in tour.attendees.all():
+            lines.append(f'{attendee.first_name} {attendee.last_name}')
+        lines.append(f'Tour Plan:{tour.tour_plan}')
+        lines.append('=================================================')
+        # do poprawy zawijanie tekstu
+        # www.reportlab.com/docs/reportlab-userquide.pdf
+
+    for line in lines:
+        textobj.textLine(line)
+
+    c.drawText(textobj)
+    c.showPage()
+    c.save()
+    buf.seek(0)
+
+    return FileResponse(buf, as_attachment=True, filename='tour.pdf')
+
+
+def tour_text(request):
+    response = HttpResponse(content_type='text/plain')
+    response['Content-Disposition'] = 'attachment; filename=tour_place.txt'
+
+    tours = Tour.objects.all()
+    lines = []
+
+    for tour in tours:
+        lines.append(
+            f'Tour Name: {tour.title}\n{tour.description}\n{tour.start_date}\n{tour.end_date}\n{tour.price}\n\nTransport:\n')
+        for transport in tour.transports.all():
+            lines.append(f'{transport.type} - {transport.description}')
+        lines.append(f'Manager: {tour.administrator}\n')
+        for attendee in tour.attendees.all():
+            lines.append(f'{attendee.first_name}  {attendee.last_name}\n')
+        lines.append(f'\nTour Plan:\n{tour.tour_plan}\n\n\n')
+        # dokonczczyc tutaj reszte ...
+
+    response.writelines(lines)
+    return response
+
+
+def delete_place(request, id):
+    place = Place.objects.get(pk=id)
+    place.delete()
+    return redirect('list-places')
+
+
+def delete_tour(request, id):
+    tour = Tour.objects.get(pk=id)
+    tour.delete()
+    return redirect('list-tours2')
+
+
+def show_tour(request, id):
+    tour = Tour.objects.get(pk=id)
+    return render(request, 'tours/show_tour.html', {'tour': tour})
 
 
 def update_tour(request, id):
@@ -20,7 +102,7 @@ def update_tour(request, id):
 
 
 def list_tours(request):
-    tour_list = Tour.objects.all()
+    tour_list = Tour.objects.all().order_by('title')
     return render(request, 'tours/tour.html', {'tour_list': tour_list})
 
 
@@ -49,7 +131,7 @@ def show_place(request, id):
 
 
 def list_places(request):
-    place_list = Place.objects.all()
+    place_list = Place.objects.all().order_by('name')
     return render(request, 'tours/place.html', {'place_list': place_list})
 
 

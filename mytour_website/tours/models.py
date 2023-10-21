@@ -90,7 +90,7 @@ class Tour(models.Model):
     accommodation = models.ForeignKey(
         Accommodation, blank=True, null=True, on_delete=models.CASCADE)
     places = models.ManyToManyField(
-        Place, blank=True, default=None)
+        Place, blank=True)
     things_list = models.ManyToManyField(
         ThingsList, blank=True, default=None)
 

@@ -8,10 +8,11 @@
         {% for tour in tour_list %}
         <tr class="table-secondary">
             <td>
-                <a href=""> {{ tour }}</a><br>
+                <a href="{% url 'show-tour' tour.id %}"> {{ tour }}</a><br>
             </td>
             <td align="right">
                 <a href="{% url 'update-tour' tour.id %}" class="btn btn-primary btn-sm">Update</a>
+                <a href="{% url 'delete-tour' tour.id %}" class="btn btn-danger btn-sm">Delete</a>
             </td>
         </tr>
         {% endfor %}
