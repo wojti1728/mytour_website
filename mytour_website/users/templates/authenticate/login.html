@@ -3,12 +3,12 @@
 {% block content %}
 <center>
     <br /><br />
-    <h1>Login</h1>
-    <br />
+    <div class="shadow p-4 mb-5 border border-5 border-primary rounded w-75">
+        <h1>Login</h1>
+        <br />
 
-    <form form action="" method=POST>
-        {% csrf_token %}
-        <form>
+        <form form action="" method=POST>
+            {% csrf_token %}
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Username</label>
                 <input type="text" class="form-control" name="username" aria-describedby="emailHelp">
@@ -21,6 +21,7 @@
 
             <input type="submit" value="Submit" class="btn btn-primary">
         </form>
+    </div>
 </center>
 
 {% endblock %}

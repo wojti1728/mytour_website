@@ -1,0 +1,28 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+<!-- <center> -->
+{% if form.errors %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+    There was an error with your form!
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{% endif %}
+<br /><br />
+<div class="shadow p-4 mb-5 bg-body rounded w-75">
+
+
+    <h1>Register</h1>
+    <br />
+
+    <form form action="{% url 'register_user' %}" method=POST>
+        {% csrf_token %}
+        <form>
+            {{ form.as_p }}
+
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </form>
+</div>
+<!-- </center> -->
+
+{% endblock %}
