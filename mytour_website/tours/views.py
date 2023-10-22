@@ -1,3 +1,4 @@
+from pyexpat.errors import messages
 from django.shortcuts import render, redirect
 import calendar
 from calendar import HTMLCalendar
@@ -6,8 +7,8 @@ from .models import Tour, Place
 from .forms import PlaceForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.forms import modelformset_factory, inlineformset_factory
-from .forms import TourForm
-
+from .forms import TourForm, TourFormAdmin
+from django.contrib import messages
 from django.http import FileResponse
 import io
 from reportlab.pdfgen import canvas
@@ -85,8 +86,15 @@ def delete_place(request, id):
 
 def delete_tour(request, id):
     tour = Tour.objects.get(pk=id)
-    tour.delete()
-    return redirect('list-tours2')
+    if request.user == tour.administrator:
+        tour.delete()
+        messages.success(
+            request, ("Your Tour Was Deleted!"))
+        return redirect('list-tours2')
+    else:
+        messages.success(
+            request, ("Your Are Not Authorized To Delete This Tour"))
+        return redirect('list-tours2')
 
 
 def show_tour(request, id):
@@ -156,12 +164,42 @@ def create_tour(request):
             return HttpResponseRedirect('/create_tour?submitted=True')
     else:
         tour_form = TourForm()
+
         if 'submitted' in request.GET:
             submitted = True
 
     return render(request, 'tours/create_tour.html', {
         'tour_form': tour_form
     })
+
+
+# def create_tour(request):
+#     submitted = False
+#     if request.method == 'POST':
+#         if request.user.is_superuser:
+#             tour_form = TourFormAdmin(request.POST)
+#             if tour_form.is_valid():
+#                 tour_form.save()
+#                 return HttpResponseRedirect('/create_tour?submitted=True')
+#         else:
+#             tour_form = TourForm(request.POST)
+#             if tour_form.is_valid():
+#                 # tour = tour_form.save(commit=False)
+#                 tour.administrator = request.user
+#                 tour.save()
+#                 return HttpResponseRedirect('/create_tour?submitted=True')
+#     else:
+#         if request.user.is_superuser:
+#             tour_form = TourFormAdmin
+#         else:
+#             tour_form = TourForm
+
+#         if 'submitted' in request.GET:
+#             submitted = True
+
+#     return render(request, 'tours/create_tour.html', {
+#         'tour_form': tour_form
+#     })
 
 
 def add_place(request):
