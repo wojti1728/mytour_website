@@ -8,9 +8,10 @@ class Place(models.Model):
     description = models.TextField(max_length=300)
     address = models.CharField(max_length=200)
     web = models.URLField('Web Address')
+    owner = models.IntegerField(blank=False, default=1)
 
     def __str__(self):
-        return f"This is a {self.name}"
+        return f"{self.name}"
 
 
 class Transport(models.Model):
@@ -19,7 +20,7 @@ class Transport(models.Model):
     description = models.TextField(max_length=300)
 
     def __str__(self):
-        return f"Transport: {self.type}"
+        return f"{self.type}"
 
 
 class Accommodation(models.Model):
@@ -29,7 +30,7 @@ class Accommodation(models.Model):
     price = models.IntegerField()
 
     def __str__(self):
-        return f"Accommodation: {self.name}"
+        return f"{self.name}"
 
 
 # class Sightseeing(models.Model):
@@ -59,7 +60,7 @@ class ThingsList(models.Model):
     description = models.TextField(max_length=300)
 
     def __str__(self):
-        return f"ThingsList: {self.title}"
+        return f"{self.title}"
 
 
 class MyTourUser(models.Model):
@@ -70,7 +71,7 @@ class MyTourUser(models.Model):
     email = models.EmailField('User Email')
 
     def __str__(self):
-        return f"User: {self.first_name} {self.last_name}"
+        return f"{self.first_name} {self.last_name}"
 
 
 class Tour(models.Model):
@@ -95,4 +96,4 @@ class Tour(models.Model):
         ThingsList, blank=True, default=None)
 
     def __str__(self):
-        return f"Tour: {self.title}"
+        return f"{self.title}"

@@ -51,10 +51,12 @@
                 </ul>
                 </p>
         </div>
+        {% if user.is_authenticated %}
         <div class="card-footer text-body-secondary">
             <a href="{% url 'update-tour' tour.id %}" class="btn btn-primary btn-sm">Update Tour</a>
             <a href="{% url 'delete-tour' tour.id %}" class="btn btn-danger btn-sm">Delete</a>
         </div>
+        {% endif %}
     </div>
 </center>
 

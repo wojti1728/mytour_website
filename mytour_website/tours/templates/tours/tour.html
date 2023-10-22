@@ -10,10 +10,16 @@
             <td>
                 <a href="{% url 'show-tour' tour.id %}"> {{ tour }}</a><br>
             </td>
+            {% if user.is_authenticated %}
+            {% if user == tour.administrator %}
             <td align="right">
                 <a href="{% url 'update-tour' tour.id %}" class="btn btn-primary btn-sm">Update</a>
                 <a href="{% url 'delete-tour' tour.id %}" class="btn btn-danger btn-sm">Delete</a>
             </td>
+            {% else %}
+            <td align="right"></td>
+            {% endif %}
+            {% endif %}
         </tr>
         {% endfor %}
     </table>

@@ -2,6 +2,8 @@
 
 {% block content %}
 <center>
+    {% if user.is_authenticated %}
+    {% if user == tour.administrator %}
     <h1>Update Tour</h1>
 
     <br />
@@ -11,7 +13,14 @@
         <br>
         <input type="submit" value="Update" class="btn btn-primary">
     </form>
-
+    {% else %}
+    <h1>Access Denied!</h1>
+    <p>Only Manager of the specific tour can do some changes.</p>
+    {% endif %}
+    {% else %}
+    <h1>Sorry! You Must Be Logged In To Get This Page. </h1>
+    <a class="btn-primary" href="{% url 'login' %}">Login Here</a>
+    {% endif %}
 
 </center>
 

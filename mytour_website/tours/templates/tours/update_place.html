@@ -2,6 +2,7 @@
 
 {% block content %}
 <center>
+    {% if user.is_authenticated %}
     <h1>Update Place</h1>
 
     <br />
@@ -11,7 +12,10 @@
         <br>
         <input type="submit" value="Update" class="btn btn-primary">
     </form>
-
+    {% else %}
+    <h1>Sorry! You Must Be Logged In To Get This Page. </h1>
+    <a class="btn-primary" href="{% url 'login' %}">Login Here</a>
+    {% endif %}
 
 </center>
 

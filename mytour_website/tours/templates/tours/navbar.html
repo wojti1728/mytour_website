@@ -68,6 +68,7 @@
                                     </svg>
                                     <span class="ml-3">All Tours</span>
                                 </a></li>
+                            {% if user.is_authenticated %}
                             <li> <a class="dropdown-item" href="{% url 'create-tour' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path fill="currentColor"
@@ -75,6 +76,7 @@
                                     </svg>
                                     <span class="ml-3">Add Tour</span>
                                 </a></li>
+                            {% endif %}
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -97,6 +99,7 @@
                                     </svg>
                                     <span class="ml-3">All Places</span>
                                 </a></li>
+                            {% if user.is_authenticated %}
                             <li> <a class="dropdown-item" href="{% url 'add-place' %}">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                         <path fill="none" stroke="currentColor" stroke-linecap="round"
@@ -104,6 +107,7 @@
                                     </svg>
                                     <span class="ml-3">Add Place</span>
                                 </a></li>
+                            {% endif %}
 
                         </ul>
                     </li>
@@ -120,6 +124,7 @@
                             <span class="ml-3">Photos</span>
                         </a>
                     </li>
+                    {% if user.is_authenticated %}
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                             aria-expanded="false">
@@ -142,6 +147,7 @@
                                     <span class="ml-3">Tour Txt File</span></a></li>
                         </ul>
                     </li>
+                    {% endif %}
 
                     <hr>
 

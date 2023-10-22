@@ -170,7 +170,9 @@ def add_place(request):
     if request.method == 'POST':
         form = PlaceForm(request.POST)
         if form.is_valid():
-            form.save()
+            place = form.save(commit=False)
+            place.owner = request.user.id
+            place.save()
             return HttpResponseRedirect('/add_place?submitted=True')
         else:
             form = PlaceForm
