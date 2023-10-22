@@ -14,6 +14,8 @@ from reportlab.pdfgen import canvas
 from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
+from django.core.paginator import Paginator
+
 
 def tour_pdf(request):
     buf = io.BytesIO()
@@ -103,7 +105,11 @@ def update_tour(request, id):
 
 def list_tours(request):
     tour_list = Tour.objects.all().order_by('title')
-    return render(request, 'tours/tour.html', {'tour_list': tour_list})
+    p = Paginator(Tour.objects.all().order_by('title'), 2)
+    page = request.GET.get('page')
+    tours = p.get_page(page)
+    nums = tours.paginator.num_pages * "*"
+    return render(request, 'tours/tour.html', {'tours': tours, 'nums': nums})
 
 
 def update_place(request, id):
@@ -131,8 +137,13 @@ def show_place(request, id):
 
 
 def list_places(request):
-    place_list = Place.objects.all().order_by('name')
-    return render(request, 'tours/place.html', {'place_list': place_list})
+    # pagination
+    p = Paginator(Place.objects.all(), 2)
+    page = request.GET.get('page')
+    places = p.get_page(page)
+    nums = places.paginator.num_pages * "*"
+
+    return render(request, 'tours/place.html', {'places': places, 'nums': nums})
 
 
 def create_tour(request):
