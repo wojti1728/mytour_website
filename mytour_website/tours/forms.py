@@ -13,7 +13,7 @@ class TourFormAdmin(forms.ModelForm):
         model = Tour
         fields = ('title', 'description', 'start_date',
                   'end_date', 'transports', 'price', 'administrator',
-                  'attendees', 'places', 'tour_plan', 'accommodation', 'things_list',)
+                  'attendees', 'places', 'tour_plan', 'accommodation', 'things_list')
 
         labels = {
             'title': 'Tour Name',
@@ -96,13 +96,14 @@ class TourForm(forms.ModelForm):
 class PlaceForm(ModelForm):
     class Meta:
         model = Place
-        fields = ('name', 'description', 'address', 'web')
+        fields = ('name', 'description', 'address', 'web', 'place_image')
 
         labels = {
             'name': '',
             'description': '',
             'address': '',
-            'web': ''
+            'web': '',
+            'place_image': ''
         }
 
         widgets = {

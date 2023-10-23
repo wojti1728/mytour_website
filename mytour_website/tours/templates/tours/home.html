@@ -2,14 +2,55 @@
 
 {% block content %}
 <center>
-    <h1>Hello World Events For
-        {{ month }} {{year}}</h1>
+    <h1>Happy Tours!</h1>
 
-    <br />
-    As of {{ time }}
-    <br />
-    {{ cal|safe }}
-    <br /><br />
+    <div class="card w-50">
+        <div class=" card-header">
+            <b>{{ now }}</b>
+        </div>
+        <div class="card-body">
+            <br />
+            {{ cal|safe }}
+            <br /><br />
+            <h3>Tours Happen This Month</h3>
+
+            {% if tour_list %}
+            {% for tour in tour_list %}
+            <br><br>
+            <div class="card">
+                <div class=" card-header">
+                    <h5 class="card-title">{{ tour }}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+
+                    <ul>
+                        <b>Description:</b><br> {{ tour.description }}<br><br>
+                        <b>Start Date:</b><br> {{ tour.start_date }}<br><br>
+                        <b>End Date:</b><br> {{ tour.end_date }}<br><br>
+                        <b>Price:</b><br> {{ tour.price }} PLN<br>
+                        <br><br>
+                        <b>Attendess:</b>
+                        <table class="table table-primary table-striped table-bordered w-25">
+                            {% for user in tour.attendees.all %}
+                            <tr class="table-secondary">
+                                <td style="text-align: center;">
+                                    {{ user.first_name }} {{ user.last_name }}<br>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                        <br>
+                        </p>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            SORRY
+            {% endif %}
+        </div>
+    </div>
+    <br><br><br><br>
     Copyright (c) {{ current_year }}
 </center>
 

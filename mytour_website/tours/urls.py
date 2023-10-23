@@ -24,4 +24,5 @@ urlpatterns = [
     path('tour_text', views.tour_text, name='tour_text'),
     path('tour_pdf', views.tour_pdf, name='tour_pdf'),
     path('my_tours', views.my_tours, name='my_tours'),
+    path('search_tours', views.search_tours, name='search_tours'),
 ]

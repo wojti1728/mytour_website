@@ -12,6 +12,9 @@
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
+    {% if user.is_authenticated %}
+    <h5>Hello, {{ user.first_name }} {{ user.last_name }} ({{user}})!</h5>
+    {% endif %}
     <form class="d-flex" method=POST action="{% url 'search-places' %}">
         {% csrf_token %}
         <input name="searched" class="form-control form-control-dark me-2" type="search" placeholder="Search key words"
@@ -84,6 +87,13 @@
                                     <span class="ml-3">My Tours</span>
                                 </a></li>
                             {% endif %}
+                            <li> <a class="dropdown-item" href="{% url 'search_tours' %}">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                                        <path fill="currentColor"
+                                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5A6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5S14 7.01 14 9.5S11.99 14 9.5 14z" />
+                                    </svg>
+                                    <span class="ml-3">Search Tours</span>
+                                </a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">

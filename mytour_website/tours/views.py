@@ -17,6 +17,17 @@ from reportlab.lib.pagesizes import letter
 
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
+from django.db.models import Q
+
+
+def search_tours(request):
+    if request.method == 'POST':
+        searched = request.POST.get('searched', False)
+        tours = Tour.objects.filter(title__icontains=searched)
+
+        return render(request, 'tours/search_tours.html', {'searched': searched, 'tours': tours})
+    else:
+        return render(request, 'tours/search_tours.html', {})
 
 
 def my_tours(request):
@@ -134,7 +145,8 @@ def list_tours(request):
 
 def update_place(request, id):
     place = Place.objects.get(pk=id)
-    form = PlaceForm(request.POST or None, instance=place)
+    form = PlaceForm(request.POST or None,
+                     request.FILES or None, instance=place)
     if form.is_valid():
         form.save()
         return redirect('list-places')
@@ -219,7 +231,7 @@ def add_place(request):
     submitted = False
     form = PlaceForm
     if request.method == 'POST':
-        form = PlaceForm(request.POST)
+        form = PlaceForm(request.POST, request.FILES)
         if form.is_valid():
             place = form.save(commit=False)
             place.owner = request.user.id
@@ -249,6 +261,11 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
     now = datetime.now()
     current_year = now.year
 
+    tour_list = Tour.objects.filter(
+        start_date__year=year,
+        start_date__month=month_number
+    )
+
     time = now.strftime('%I:%M %p')
     # create a calendar
     cal = HTMLCalendar().formatmonth(
@@ -264,4 +281,6 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime('%B'))
         "current_year": current_year,
         "now": now,
         "time": time,
+        "tour_list": tour_list,
+        "now": now
     })

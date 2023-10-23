@@ -9,6 +9,7 @@ class Place(models.Model):
     address = models.CharField(max_length=200)
     web = models.URLField('Web Address')
     owner = models.IntegerField(blank=False, default=1)
+    place_image = models.ImageField(null=True, blank=True, upload_to="images/")
 
     def __str__(self):
         return f"{self.name}"

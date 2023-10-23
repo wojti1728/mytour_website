@@ -17,6 +17,10 @@
                 <a href="{{ place.web }}"> {{ place.web }}</a> <br>
                 <b>Place Owner: </b>
                 {{ place_owner }}
+                <br><br>
+                {% if place.place_image %}
+                <img src="{{ place.place_image.url }}" width="75%">
+                {% endif %}
             </p>
         </div>
     </div>
