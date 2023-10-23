@@ -1,0 +1,73 @@
+{% extends 'tours/base.html' %}
+
+{% block content %}
+
+<h1>My Tours</h1>
+<br>
+<ul>
+    {% for tour in tours %}
+    <br />
+    <div class="card w-50">
+        <div class=" card-header">
+            <h5 class="card-title">{{ tour }}</h5>
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">{{ tour }} at {{ tour.place }} | Period: {{ tour.start_date }} - {{ tour.end_date }}
+            </h5>
+            <p class="card-text">
+
+            <ul>
+                <b>Description:</b><br> {{ tour.description }}<br><br>
+                <b>Start Date:</b><br> {{ tour.start_date }}<br><br>
+                <b>End Date:</b><br> {{ tour.end_date }}<br><br>
+                <b>Price:</b><br> {{ tour.price }} PLN<br>
+                <br>
+                <b>Things List:</b>
+                <table class="table table-primary table-striped table-bordered w-25">
+                    {% for item in tour.things_list.all %}
+                    <tr class="table-secondary">
+                        <td>
+                            {{ item }}<br>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br><br>
+                <b>Attendess:</b>
+                <table class="table table-primary table-striped table-bordered w-25">
+                    {% for user in tour.attendees.all %}
+                    <tr class="table-secondary">
+                        <td style="text-align: center;">
+                            {{ user.first_name }} {{ user.last_name }}<br>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </table>
+                <br>
+                <ul>
+                    <b>Whole Plan With Details:</b><br>
+                    <table class="table table-primary table-bordered w-75">
+                        <tr class="table-secondary">
+                            <td>
+                                {{ tour.tour_plan }}
+                            </td>
+                        </tr>
+                    </table>
+
+                </ul>
+                </p>
+        </div>
+        {% if user.is_authenticated %}
+        <div class="card-footer text-body-secondary">
+            <a href="{% url 'update-tour' tour.id %}" class="btn btn-primary btn-sm">Update Tour</a>
+            <a href="{% url 'delete-tour' tour.id %}" class="btn btn-danger btn-sm">Delete</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</ul>
+
+<br /><br />
+
+
+{% endblock %}

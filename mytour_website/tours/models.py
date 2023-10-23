@@ -63,17 +63,6 @@ class ThingsList(models.Model):
         return f"{self.title}"
 
 
-class MyTourUser(models.Model):
-    id = models.BigAutoField(primary_key=True)
-    first_name = models.CharField(max_length=30)
-    last_name = models.CharField(max_length=30)
-    user_name = models.CharField(max_length=30)
-    email = models.EmailField('User Email')
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-
 class Tour(models.Model):
     id = models.BigAutoField(primary_key=True)
     title = models.CharField(max_length=200)
@@ -84,9 +73,9 @@ class Tour(models.Model):
         Transport, blank=True, default=None)
     price = models.IntegerField()
     administrator = models.ForeignKey(
-        User, blank=True, null=True, on_delete=models.SET_NULL)
+        User, blank=True, on_delete=models.CASCADE)
     attendees = models.ManyToManyField(
-        MyTourUser, blank=True)
+        User, related_name='attendees', blank=True)
     tour_plan = models.TextField(max_length=1000, default=None)
     accommodation = models.ForeignKey(
         Accommodation, blank=True, null=True, on_delete=models.CASCADE)

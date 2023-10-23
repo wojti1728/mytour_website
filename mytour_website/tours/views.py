@@ -16,6 +16,18 @@ from reportlab.lib.units import inch
 from reportlab.lib.pagesizes import letter
 
 from django.core.paginator import Paginator
+from django.contrib.auth.models import User
+
+
+def my_tours(request):
+    if request.user.is_authenticated:
+        me = request.user.id
+        tours = Tour.objects.filter(attendees=me)
+        return render(request, 'tours/my_tours.html', {'tours': tours})
+    else:
+        messages.success(
+            request, ("You are not authorized to see this page!"))
+        return redirect('home')
 
 
 def tour_pdf(request):
@@ -141,7 +153,8 @@ def search_places(request):
 
 def show_place(request, id):
     place = Place.objects.get(pk=id)
-    return render(request, 'tours/show_place.html', {'place': place})
+    place_owner = User.objects.get(pk=place.owner)
+    return render(request, 'tours/show_place.html', {'place': place, 'place_owner': place_owner})
 
 
 def list_places(request):
