@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import date
 
 
 class Place(models.Model):
@@ -87,3 +88,11 @@ class Tour(models.Model):
 
     def __str__(self):
         return f"{self.title}"
+
+    @property
+    def Days_till(self):
+        today = date.today()
+        days_till = self.start_date - today
+        days_till_stripped = str(days_till).split(",", 1)[0]
+
+        return days_till_stripped
