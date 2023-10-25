@@ -3,11 +3,11 @@ from django.shortcuts import render, redirect
 import calendar
 from calendar import HTMLCalendar
 from datetime import datetime
-from .models import Tour, Place
+from .models import Tour, Place, Accommodation
 from .forms import PlaceForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.forms import modelformset_factory, inlineformset_factory
-from .forms import TourForm, TourFormAdmin
+from .forms import TourForm, TourFormAdmin, AccommodationForm
 from django.contrib import messages
 from django.http import FileResponse
 import io
@@ -18,6 +18,21 @@ from reportlab.lib.pagesizes import letter
 from django.core.paginator import Paginator
 from django.contrib.auth.models import User
 from django.db.models import Q
+
+
+def add_accommodation(request):
+    submitted = False
+    form = AccommodationForm(request.POST)
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_accommodation?submitted=True')
+        else:
+            form = PlaceForm
+            if 'submitted' in request.GET:
+                submitted = True
+
+    return render(request, 'tours/add_accommodation.html', {'form': form, 'submitted': submitted})
 
 
 def search_tours(request):

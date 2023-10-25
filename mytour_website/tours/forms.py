@@ -113,3 +113,9 @@ class PlaceForm(ModelForm):
             'web': forms.TextInput(attrs={'class': 'form-control w-50', 'placeholder': 'Web Address'})
 
         }
+
+
+class AccommodationForm(ModelForm):
+    class Meta:
+        model = Accommodation
+        fields = ('name', 'description', 'price')
