@@ -119,3 +119,31 @@ class AccommodationForm(ModelForm):
     class Meta:
         model = Accommodation
         fields = ('name', 'description', 'price')
+
+        labels = {
+            'name': 'Accommodation Name',
+            'description': 'Description',
+            'price': 'Price'
+        }
+
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form-control w-50', 'placeholder': 'Accommodation Name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control w-50', 'placeholder': 'Description'}),
+            'price': forms.NumberInput(attrs={'class': 'form-control w-25', 'placeholder': 'Price'})
+        }
+
+
+class ThingsListForm(ModelForm):
+    class Meta:
+        model = ThingsList
+        fields = ('title', 'description')
+
+        labels = {
+            'title': 'Item Name',
+            'description': 'Description'
+        }
+
+        widgets = {
+            'title': forms.TextInput(attrs={'class': 'form-control w-50', 'placeholder': 'Item Name'}),
+            'description': forms.Textarea(attrs={'class': 'form-control w-50', 'placeholder': 'Description'})
+        }

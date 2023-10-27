@@ -7,7 +7,7 @@ from .models import Tour, Place, Accommodation
 from .forms import PlaceForm
 from django.http import HttpResponseRedirect, HttpResponse
 from django.forms import modelformset_factory, inlineformset_factory
-from .forms import TourForm, TourFormAdmin, AccommodationForm
+from .forms import TourForm, TourFormAdmin, AccommodationForm, ThingsListForm
 from django.contrib import messages
 from django.http import FileResponse
 import io
@@ -20,15 +20,32 @@ from django.contrib.auth.models import User
 from django.db.models import Q
 
 
+def add_new_item(request):
+    submitted = False
+    form = ThingsListForm()
+    if request.method == 'POST':
+        form = ThingsListForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/add_new_item?submitted=True')
+        else:
+            form = ThingsListForm
+            if 'submitted' in request.GET:
+                submitted = True
+
+    return render(request, 'tours/add_new_item.html', {'form': form, 'submitted': submitted})
+
+
 def add_accommodation(request):
     submitted = False
-    form = AccommodationForm(request.POST)
+    form = AccommodationForm()
     if request.method == 'POST':
+        form = AccommodationForm(request.POST)
         if form.is_valid():
             form.save()
             return HttpResponseRedirect('/add_accommodation?submitted=True')
         else:
-            form = PlaceForm
+            form = AccommodationForm
             if 'submitted' in request.GET:
                 submitted = True
 
@@ -165,8 +182,7 @@ def update_tour(request, id):
 
 
 def list_tours(request):
-    tour_list = Tour.objects.all().order_by('title')
-    p = Paginator(Tour.objects.all().order_by('title'), 2)
+    p = Paginator(Tour.objects.all().order_by('title'), 12)
     page = request.GET.get('page')
     tours = p.get_page(page)
     nums = tours.paginator.num_pages * "*"
@@ -201,7 +217,7 @@ def show_place(request, id):
 
 def list_places(request):
     # pagination
-    p = Paginator(Place.objects.all(), 2)
+    p = Paginator(Place.objects.all(), 12)
     page = request.GET.get('page')
     places = p.get_page(page)
     nums = places.paginator.num_pages * "*"
@@ -277,9 +293,12 @@ def add_place(request):
 
 def all_tours(request):
     tour_list = Tour.objects.all()
-
+    p = Paginator(Tour.objects.all().order_by('title'), 12)
+    page = request.GET.get('page')
+    tours = p.get_page(page)
+    nums = tours.paginator.num_pages * "*"
     return render(request, 'tours/tour_list.html',
-                  {'tour_list': tour_list})
+                  {'tour_list': tour_list, 'nums': nums})
 
 
 def home(request, year=datetime.now().year, month=datetime.now().strftime('%B')):

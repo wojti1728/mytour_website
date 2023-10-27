@@ -4,10 +4,10 @@
 <center>
     {% if user.is_authenticated %}
     <br /><br />
-    <h1>Add Accommodation To Database</h1>
+    <h1>Add New Item List To Database</h1>
     <br /><br />
     {% if request.GET.submitted %}
-    Your Accommodation Was Submitted Succefully!!
+    Your New List Item Was Added Succefully!!
     {% else %}
     <form action="" method=POST enctype="multipart/form-data">
         {% csrf_token %}
