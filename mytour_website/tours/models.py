@@ -35,27 +35,6 @@ class Accommodation(models.Model):
         return f"{self.name}"
 
 
-# class Sightseeing(models.Model):
-#     name = models.CharField(max_length=100)
-#     description = models.TextField(max_length=300)
-#     address = models.ForeignKey(Place, on_delete=models.CASCADE)
-#     price = models.IntegerField()
-
-#     def __str__(self):
-#         return f"Sightseeing: {self.name}"
-
-
-# class Day(models.Model):
-#     date = models.DateField()
-#     places = models.ManyToManyField(Place, related_name='days')
-#     accomadation = models.ForeignKey(
-#         Accommodation, on_delete=models.CASCADE, related_name='days', blank=True)
-#     sightseeing = models.ManyToManyField(Sightseeing, related_name='days')
-
-#     def __str__(self):
-#         return f"Day: {self.date}"
-
-
 class ThingsList(models.Model):
     id = models.BigAutoField(primary_key=True)
     title = models.CharField('Title', max_length=100)

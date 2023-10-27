@@ -118,8 +118,15 @@ def tour_text(request):
 
 def delete_place(request, id):
     place = Place.objects.get(pk=id)
-    place.delete()
-    return redirect('list-places')
+    if request.user.id == place.owner:
+        place.delete()
+        messages.success(
+            request, ("Your Place Was Deleted!"))
+        return redirect('list-places')
+    else:
+        messages.success(
+            request, ("Your Are Not Authorized To Delete This Place"))
+        return redirect('list-places')
 
 
 def delete_tour(request, id):
@@ -142,10 +149,18 @@ def show_tour(request, id):
 
 def update_tour(request, id):
     tour = Tour.objects.get(pk=id)
-    form = TourForm(request.POST or None, instance=tour)
-    if form.is_valid():
-        form.save()
+    if request.user == tour.administrator:
+        form = TourForm(request.POST or None, instance=tour)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, ("Your Tour Was Updated!"))
+            return redirect('list-tours2')
+    else:
+        messages.success(
+            request, ("Your Are Not Authorized To Delete This Tour"))
         return redirect('list-tours2')
+
     return render(request, 'tours/update_tour.html', {'tour': tour, 'form': form})
 
 
@@ -209,7 +224,7 @@ def create_tour(request):
             submitted = True
 
     return render(request, 'tours/create_tour.html', {
-        'tour_form': tour_form
+        'tour_form': tour_form, 'submitted': submitted
     })
 
 
