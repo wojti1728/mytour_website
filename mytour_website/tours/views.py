@@ -65,7 +65,7 @@ def search_tours(request):
 def my_tours(request):
     if request.user.is_authenticated:
         me = request.user.id
-        tours = Tour.objects.filter(attendees=me)
+        tours = Tour.objects.filter(Q(attendees=me) | Q(administrator=me))
         return render(request, 'tours/my_tours.html', {'tours': tours})
     else:
         messages.success(
