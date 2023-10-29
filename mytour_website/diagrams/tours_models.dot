@@ -292,13 +292,13 @@ digraph model_graph {
   </TABLE>
   >]
   tours_models_Tour -> django_contrib_auth_models_User
-  [label=" administrator (tour)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" administrator (tour)"] [arrowhead=none, arrowtail=crow, dir=both];
 
   tours_models_Tour -> tours_models_Accommodation
-  [label=" accommodation (tour)"] [arrowhead=none, arrowtail=dot, dir=both];
+  [label=" accommodation (tour)"] [arrowhead=none, arrowtail=crow, dir=both];
 
   tours_models_Tour -> tours_models_Transport
-  [label=" transports (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" transports (tour)"] [arrowhead=crow arrowtail=crow, dir=both];
   django_contrib_auth_models_User [label=<
   <TABLE BGCOLOR="white" BORDER="0" CELLBORDER="0" CELLSPACING="0">
   <TR><TD COLSPAN="2" CELLPADDING="4" ALIGN="CENTER" BGCOLOR="#1b563f">
@@ -307,13 +307,13 @@ digraph model_graph {
   </TABLE>
   >]
   tours_models_Tour -> django_contrib_auth_models_User
-  [label=" attendees (attendees)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" attendees (attendees)"] [arrowhead=crow arrowtail=crow, dir=both];
 
   tours_models_Tour -> tours_models_Place
-  [label=" places (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" places (tour)"] [arrowhead=crow arrowtail=crow, dir=both];
 
   tours_models_Tour -> tours_models_ThingsList
-  [label=" things_list (tour)"] [arrowhead=dot arrowtail=dot, dir=both];
+  [label=" things_list (tour)"] [arrowhead=crow arrowtail=crow, dir=both];
 
 
 }
